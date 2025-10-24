@@ -53,11 +53,6 @@ It takes input such as **subjects, faculty names, and credits**, intelligently p
 
 ---
 
-## 🖼️ Preview
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/NawfalAhmad/Timetable_Generator/main/static/demo.png" alt="Timetable App Screenshot" width="80%" />
-</p>
 
 ---
 
@@ -75,3 +70,4 @@ pip install -r requirements.txt
 
 # Run the Flask app
 python app.py
+
