@@ -1,0 +1,174 @@
+/* -------------------------
+   Basic layout & fonts
+   ------------------------- */
+:root{
+    --card-bg: #ffffff;
+    --text: #333;
+    --accent: linear-gradient(135deg, #6a11cb, #2575fc);
+    --muted: #666;
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg, linear-gradient(135deg,#a8edea,#fed6e3));
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Topbar */
+.topbar {
+    width: 100%;
+    padding: 10px 20px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 20;
+}
+.brand { font-weight:700; }
+.controls { display:flex; align-items:center; gap:10px; }
+
+/* Container card */
+.container {
+    width: 95%;
+    max-width: 980px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Headings and meta */
+h1 { margin: 6px 0 10px; font-size: 20px; }
+.section { margin: 14px 0; }
+.section h2 { margin: 8px 0; font-size: 16px; color: var(--muted); }
+
+/* Inputs */
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    font-size: 14px;
+}
+.small-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.07);
+    cursor: pointer;
+}
+.primary-btn {
+    background: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    background-image: var(--accent);
+    border: none;
+    cursor:pointer;
+}
+.secondary-btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    color: #444;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    background: transparent;
+    margin-left: 8px;
+}
+
+/* Table */
+.table-wrap { overflow-x:auto; margin-top: 10px; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+th, td {
+    border: 1px solid #e6e9ef;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+th { background: #fafafa; font-weight: 600; }
+.timecell { font-weight:600; color: #444; }
+
+/* Subjects area */
+.subjects-area label { display:block; margin-top:6px; font-size:13px; color:var(--muted); }
+
+/* Fade in animation */
+.fade-in { animation: fadeIn 0.6s ease both; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform: none;} }
+
+/* Loading overlay */
+#overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    background: rgba(0,0,0,0.35);
+}
+#overlay.show { display:flex; }
+.spinner {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 8px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Dark mode */
+body.dark {
+    --card-bg: #0f1724;
+    --text: #e6eef8;
+    --muted: #9fb0c8;
+    background: #071126;
+}
+body.dark .topbar { background: rgba(6,10,18,0.6); }
+body.dark th { background: #061028; }
+
+/* Toggle switch */
+.switch {
+  position: relative;
+  display:inline-block;
+  width:46px;
+  height:26px;
+}
+.switch input { display:none; }
+.slider {
+  position: absolute; inset:0; cursor: pointer;
+  background: #ccc; border-radius: 26px;
+  transition: .25s;
+}
+.slider:before {
+  content:""; position:absolute; left:4px; top:4px; width:18px; height:18px;
+  background:white; border-radius:50%; transition:.25s;
+}
+input:checked + .slider { background: #4f46e5; }
+input:checked + .slider:before { transform: translateX(20px); }
+.slider.round { border-radius:26px; }
+.slider.round:before { border-radius:50%; }
+
+/* Responsive */
+@media (min-width: 760px) {
+    input[type="text"], input[type="number"], select { max-width: 48%; display:inline-block; margin-right: 12px; }
+    .subjects-area input { max-width: 48%; display:inline-block; margin-right:12px; }
+}

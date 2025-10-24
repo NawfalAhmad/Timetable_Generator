@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Automated Timetable Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div id="overlay"></div>
+
+    <div class="topbar">
+        <div class="brand">Timetable Generator</div>
+        <div class="controls">
+            <label class="switch">
+                <input id="themeToggle" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="container fade-in">
+        <h1>Automated Timetable Generation System</h1>
+
+        <form id="mainForm" action="/generate" method="post" onsubmit="showLoading()">
+            <section class="section">
+                <h2>Institution Details</h2>
+                <input type="text" name="institution_name" placeholder="Institution Name" value="{{ defaults.institution_name }}" required>
+                <input type="text" name="department" placeholder="Department (e.g., CSE)" value="{{ defaults.department }}">
+                <input type="text" name="calendar_year" placeholder="Calendar Year (e.g., 2025-2026)" value="{{ defaults.calendar_year }}">
+                <select name="semester" required>
+                    <option value="ODD" {% if defaults.semester == 'ODD' %}selected{% endif %}>ODD</option>
+                    <option value="EVEN" {% if defaults.semester == 'EVEN' %}selected{% endif %}>EVEN</option>
+                </select>
+                <input type="text" name="class_name" placeholder="Class (e.g., B.E CSE - A)" value="{{ defaults.class_name }}">
+                <input type="text" name="semester_number" placeholder="Semester Number (e.g., 5)" value="{{ defaults.semester_number }}">
+                <input type="text" name="venue" placeholder="Venue (e.g., LAB-305)" value="{{ defaults.venue }}">
+            </section>
+
+            <section class="section">
+                <h2>Subjects</h2>
+                <label for="num_subjects">Enter Number of Subjects:</label>
+                <input type="number" id="num_subjects" name="num_subjects" min="1" max="20" required>
+                <button type="button" class="small-btn" onclick="generateSubjectInputs()">Next</button>
+
+                <div id="subjects" class="subjects-area"></div>
+            </section>
+
+            <div class="actions">
+                <button type="submit" class="primary-btn" id="generateBtn" style="display:none;">Generate Timetable</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

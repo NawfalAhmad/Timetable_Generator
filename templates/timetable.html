@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Your Timetable</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <div class="topbar">
+        <div class="brand">Timetable Generator</div>
+        <div class="controls">
+            <label class="switch">
+                <input id="themeToggle" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="container fade-in">
+        <h1>{{ institution.institution_name }}</h1>
+        <p class="meta">
+            Department: {{ institution.department }} |
+            Year: {{ institution.calendar_year }} |
+            SEMESTER: {{ institution.semester }} |
+            Class: {{ institution.class_name }} |
+            Sem No: {{ institution.semester_number }} |
+            Venue: {{ institution.venue }}
+        </p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        {% for day in days %}
+                        <th>{{ day }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(time_slots|length) %}
+                    <tr>
+                        <td class="timecell">{{ time_slots[i] }}</td>
+                        {% for day in days %}
+                        <td>{{ timetable[day][i] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <a href="/download" class="primary-btn">Download Timetable (.docx)</a>
+            <a href="/" class="secondary-btn">Generate Another</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
